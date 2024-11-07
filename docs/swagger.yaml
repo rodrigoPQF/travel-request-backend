@@ -1,0 +1,206 @@
+basePath: /v1/travel
+definitions:
+  dtos.CreateTravelRequestInputDto:
+    properties:
+      applicantName:
+        maxLength: 100
+        minLength: 3
+        type: string
+      departureDate:
+        type: string
+      destination:
+        maxLength: 100
+        minLength: 3
+        type: string
+      id:
+        type: string
+      returnDate:
+        type: string
+      status:
+        enum:
+        - REQUESTED
+        - APPROVED
+        - CANCELED
+        type: string
+    required:
+    - applicantName
+    - departureDate
+    - destination
+    - id
+    - returnDate
+    - status
+    type: object
+  dtos.TravelRequestDto:
+    properties:
+      applicantName:
+        type: string
+      departureDate:
+        type: string
+      destination:
+        type: string
+      id:
+        type: string
+      returnDate:
+        type: string
+      status:
+        type: string
+    type: object
+  dtos.UpdateTravelRequestBodyInputDto:
+    properties:
+      status:
+        enum:
+        - APPROVED
+        - CANCELED
+        type: string
+    required:
+    - status
+    type: object
+  handlers.BaseResponseHandler:
+    properties:
+      message:
+        type: string
+      payload: {}
+      status:
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: My Github
+    url: https://github.com/rodrigoPQF
+  description: Teste Técnico - Desenvolvedor Pleno Golang Onfly - Documentação
+  title: Travel API Documentation
+  version: "1.0"
+paths:
+  /request:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new travel request with the provided details
+      parameters:
+      - description: Travel Request creation payload
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.CreateTravelRequestInputDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.BaseResponseHandler'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.BaseResponseHandler'
+      summary: Creates a new travel request
+      tags:
+      - Travel Request
+    put:
+      consumes:
+      - application/json
+      description: Updates details of a travel request by ID
+      parameters:
+      - description: Travel Request ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Request body for updating a travel request
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateTravelRequestBodyInputDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.BaseResponseHandler'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.BaseResponseHandler'
+      summary: Updates a travel request
+      tags:
+      - Travel Request
+  /request/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Fetches details of a travel request by ID
+      parameters:
+      - description: Travel Request ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/handlers.BaseResponseHandler'
+            - properties:
+                payload:
+                  $ref: '#/definitions/dtos.TravelRequestDto'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.BaseResponseHandler'
+      summary: Retrieves a travel request
+      tags:
+      - Travel Request
+  /request/all:
+    get:
+      consumes:
+      - application/json
+      description: Fetches all travel requests based on query parameters
+      parameters:
+      - description: Status filter
+        enum:
+        - PENDING
+        - APPROVED
+        - CANCELED
+        in: query
+        name: status
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Limit per page
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/handlers.BaseResponseHandler'
+            - properties:
+                payload:
+                  items:
+                    $ref: '#/definitions/dtos.TravelRequestDto'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.BaseResponseHandler'
+      summary: Retrieves a list of all travel requests
+      tags:
+      - Travel Request
+swagger: "2.0"
