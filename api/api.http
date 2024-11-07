@@ -1,0 +1,34 @@
+
+# Rota de obter todos travel request
+GET /v1/travel/request/all?status=CANCELED HTTP/1.1
+Host: localhost:8080
+
+# Rota de obter travel request pelo id
+GET /v1/travel/request/38defc47-42a9-416c-b478-4c76c53d5b69 HTTP/1.1
+Host: localhost:8080
+
+# Rota de criar travel request
+POST /v1/travel/request HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Content-Length: 207
+
+{
+    "id": "38defc47-42a9-416c-b478-4c76c53d2b39",
+    "applicantName": "Luck",
+    "destination": "Rio",
+    "departureDate": "2001-10-30",
+    "returnDate": "2002-02-03",
+    "status": "APPROVED"
+}
+
+
+# Rota de atualizar travel request pelo id
+PUT /v1/travel/request/38defc47-42a9-416c-b478-4c76c53d5b49 HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Content-Length: 30
+
+{
+    "status": "CANCELED"
+}
