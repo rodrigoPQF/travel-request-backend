@@ -9,7 +9,7 @@ test:
 	 $(SCRIPT_DIR)/test_excluding.sh
 
 runbuild:
-	CGO_ENABLED=0 GOOS=linux build -o bin/travel-request main.go ./cmd/goose -tags='no_mysql no_sqlite3 no_ydb' 
+	CGO_ENABLED=0 GOOS=linux go build -o bin/travel-request -tags='no_mysql no_sqlite3 no_ydb' main.go
 
 start-prod: runbuild
 	./bin/travel-request start
