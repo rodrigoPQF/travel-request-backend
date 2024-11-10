@@ -1,4 +1,5 @@
 #!/bin/bash
+export GOFLAGS="-buildvcs=false"
 
 TEST_DIRS=$(go list ./... | grep -v '/mocks' \
                         | grep -v '/handlers' \
