@@ -22,7 +22,7 @@ func (trr *travelRequestRoutes) Routes() {
 	travelRequestHandler := handlers.NewTravelRequestHandler(*trr.travelRequest)
 	travelRoute := trr.app.Group("/v1/travel")
 	travelRoute.Get("/request/all", travelRequestHandler.ListAllTravelRequest)
-	travelRoute.Post("/request/", travelRequestHandler.CreateTravelRequest)
+	travelRoute.Post("/request", travelRequestHandler.CreateTravelRequest)
 	travelRoute.Get("/request/:id", travelRequestHandler.ListTravelRequest)
 	travelRoute.Put("/request/:id", travelRequestHandler.UpdateTravelRequest)
 }

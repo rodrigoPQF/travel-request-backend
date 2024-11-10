@@ -19,51 +19,6 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/request": {
-            "put": {
-                "description": "Updates details of a travel request by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Travel Request"
-                ],
-                "summary": "Updates a travel request",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Travel Request ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Request body for updating a travel request",
-                        "name": "input",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dtos.UpdateTravelRequestBodyInputDto"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.BaseResponseHandler"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/handlers.BaseResponseHandler"
-                        }
-                    }
-                }
-            },
             "post": {
                 "description": "Creates a new travel request with the provided details",
                 "consumes": [
@@ -119,7 +74,6 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "enum": [
-                            "PENDING",
                             "APPROVED",
                             "CANCELED"
                         ],
@@ -222,6 +176,51 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "put": {
+                "description": "Updates details of a travel request by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Travel Request"
+                ],
+                "summary": "Updates a travel request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Travel Request ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Request body for updating a travel request",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.UpdateTravelRequestBodyInputDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.BaseResponseHandler"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.BaseResponseHandler"
+                        }
+                    }
+                }
             }
         }
     },
@@ -240,21 +239,26 @@ const docTemplate = `{
                 "applicantName": {
                     "type": "string",
                     "maxLength": 100,
-                    "minLength": 3
+                    "minLength": 3,
+                    "example": "Raul"
                 },
                 "departureDate": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2001-01-30"
                 },
                 "destination": {
                     "type": "string",
                     "maxLength": 100,
-                    "minLength": 3
+                    "minLength": 3,
+                    "example": "Rio de Janeiro"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "f57e8039-c69d-4de6-b483-eab41c804d16"
                 },
                 "returnDate": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2001-06-30"
                 },
                 "status": {
                     "type": "string",
@@ -270,22 +274,28 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "applicantName": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Raul"
                 },
                 "departureDate": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2001-01-30"
                 },
                 "destination": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Rio de Janeiro"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "f57e8039-c69d-4de6-b483-eab41c804d16"
                 },
                 "returnDate": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2002-06-30"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "REQUESTED"
                 }
             }
         },

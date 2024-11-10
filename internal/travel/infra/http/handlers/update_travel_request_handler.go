@@ -19,7 +19,7 @@ import (
 // @Param input body dtos.UpdateTravelRequestBodyInputDto true "Request body for updating a travel request"
 // @Success 200 {object} handlers.BaseResponseHandler
 // @Failure 400 {object} handlers.BaseResponseHandler
-// @Router /request [put]
+// @Router /request/{id}  [put]
 func (trh *travelRequestHandler) UpdateTravelRequest(ctx *fiber.Ctx) error {
 
 	travelId := ctx.Params("id")

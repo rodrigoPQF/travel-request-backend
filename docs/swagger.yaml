@@ -3,18 +3,23 @@ definitions:
   dtos.CreateTravelRequestInputDto:
     properties:
       applicantName:
+        example: Raul
         maxLength: 100
         minLength: 3
         type: string
       departureDate:
+        example: "2001-01-30"
         type: string
       destination:
+        example: Rio de Janeiro
         maxLength: 100
         minLength: 3
         type: string
       id:
+        example: f57e8039-c69d-4de6-b483-eab41c804d16
         type: string
       returnDate:
+        example: "2001-06-30"
         type: string
       status:
         enum:
@@ -33,16 +38,22 @@ definitions:
   dtos.TravelRequestDto:
     properties:
       applicantName:
+        example: Raul
         type: string
       departureDate:
+        example: "2001-01-30"
         type: string
       destination:
+        example: Rio de Janeiro
         type: string
       id:
+        example: f57e8039-c69d-4de6-b483-eab41c804d16
         type: string
       returnDate:
+        example: "2002-06-30"
         type: string
       status:
+        example: REQUESTED
         type: string
     type: object
   dtos.UpdateTravelRequestBodyInputDto:
@@ -98,36 +109,6 @@ paths:
       summary: Creates a new travel request
       tags:
       - Travel Request
-    put:
-      consumes:
-      - application/json
-      description: Updates details of a travel request by ID
-      parameters:
-      - description: Travel Request ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Request body for updating a travel request
-        in: body
-        name: input
-        required: true
-        schema:
-          $ref: '#/definitions/dtos.UpdateTravelRequestBodyInputDto'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handlers.BaseResponseHandler'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/handlers.BaseResponseHandler'
-      summary: Updates a travel request
-      tags:
-      - Travel Request
   /request/{id}:
     get:
       consumes:
@@ -158,6 +139,36 @@ paths:
       summary: Retrieves a travel request
       tags:
       - Travel Request
+    put:
+      consumes:
+      - application/json
+      description: Updates details of a travel request by ID
+      parameters:
+      - description: Travel Request ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Request body for updating a travel request
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateTravelRequestBodyInputDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.BaseResponseHandler'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.BaseResponseHandler'
+      summary: Updates a travel request
+      tags:
+      - Travel Request
   /request/all:
     get:
       consumes:
@@ -166,7 +177,6 @@ paths:
       parameters:
       - description: Status filter
         enum:
-        - PENDING
         - APPROVED
         - CANCELED
         in: query
