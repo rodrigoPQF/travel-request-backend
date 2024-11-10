@@ -62,12 +62,16 @@ func (s *PostgresDB) Migrations() error {
 	s.Session.Exec(`
     DO $$
     BEGIN
-        IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'status_type') THEN
-            CREATE TYPE status_type AS ENUM ('REQUESTED', 'APPROVED', 'CANCELED');
+        IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'status') THEN
+            CREATE TYPE status AS ENUM ('REQUESTED', 'APPROVED', 'CANCELED');
         END IF;
     END $$;
 `)
+
+if err := s.Session.AutoMigrate(&models.TravelRequest{}); err != nil {
+	return err
+}
 	log.Println("initializing migrations database")
 
-	return s.Session.AutoMigrate(&models.TravelRequest{})
+	return nil
 }
