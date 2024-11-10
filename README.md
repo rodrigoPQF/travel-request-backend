@@ -94,8 +94,10 @@ A documentação da API foi gerada usando o Swagger e está disponível em uma i
 - Após iniciar a aplicação, acesse a documentação no navegador em:
 
 ```bash
-http://localhost:5432/swagger/index.html
+http://localhost:{PORTA}/swagger/index.html
 ```
+
+{PORTA} é a porta da aplicação que está no .env
 
 # Utilização com Dev Container (Opcional)
 
