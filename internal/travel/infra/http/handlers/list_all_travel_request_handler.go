@@ -24,8 +24,8 @@ import (
 func (trh *travelRequestHandler) ListAllTravelRequest(ctx *fiber.Ctx) error {
 	var input dtos.GetAllTravelRequestInputDto
 
-	page := ctx.QueryInt("page", 1)    // Página padrão 1
-	limit := ctx.QueryInt("limit", 10)  // Limite padrão 10
+	page := ctx.QueryInt("page", 1)    
+	limit := ctx.QueryInt("limit", 10) 
 
 	input.Limit = limit
 	input.Page = page
